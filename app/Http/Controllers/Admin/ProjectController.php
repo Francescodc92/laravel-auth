@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Requests\StoreProjectRequest;
-use App\Http\Requests\UpdateProjectRequest;
+use App\Http\Requests\Project\StoreProjectRequest;
+use App\Http\Requests\Project\UpdateProjectRequest;
 use App\Http\Controllers\Controller;
 
 //model
@@ -25,7 +25,7 @@ class ProjectController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.projects.create');
     }
 
     /**
@@ -33,7 +33,15 @@ class ProjectController extends Controller
      */
     public function store(StoreProjectRequest $request)
     {
-        //
+        $project = new Project();
+        $project->title = $request->input('title'); 
+        $project->preview = $request->input('preview'); 
+        $project->collaborators = $request->input('collaborators'); 
+        $project->description = $request->input('description'); 
+        $project->technologies = $request->input('technologies');
+        $project->save();
+
+        return redirect()->route('admin.projects.show', ['project' => $project->id]);
     }
 
     /**
@@ -49,7 +57,7 @@ class ProjectController extends Controller
      */
     public function edit(Project $project)
     {
-        //
+        return view('admin.projects.edit', compact('project'));
     }
 
     /**
@@ -57,7 +65,14 @@ class ProjectController extends Controller
      */
     public function update(UpdateProjectRequest $request, Project $project)
     {
-        //
+        $project->title = $request->input('title'); 
+        $project->preview = $request->input('preview'); 
+        $project->collaborators = $request->input('collaborators'); 
+        $project->description = $request->input('description'); 
+        $project->technologies = $request->input('technologies');
+        $project->save();
+         
+        return redirect()->route('admin.projects.show', ['project' => $project->id]);
     }
 
     /**

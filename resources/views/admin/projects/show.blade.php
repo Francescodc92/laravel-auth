@@ -31,7 +31,7 @@
                   {{ $project->description }}
               </p>
               <div class="actions-container">
-                  <a href="" class="btn btn-warning mt-2">
+                  <a href="{{ route('admin.projects.edit', ['project'=>$project->id]) }}" class="btn btn-warning mt-2">
                       Modifica
                   </a>
                   <form 
