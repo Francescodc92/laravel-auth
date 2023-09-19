@@ -4,6 +4,8 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 //controllers
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\ProjectController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -25,8 +27,9 @@ Route::middleware(['auth', 'verified'])
     ->prefix('admin')
     ->group(function(){
     Route::get('/dashboard', [DashboardController::class, 'dashboard'])->name('dashboard');
+    Route::resource('projects', ProjectController::class);
 });
 
-// Route::get('/dashboard', [DashboardController::class, 'dashboard'])->middleware(['auth', 'verified'])->name('dashboard');
+
 
 require __DIR__.'/auth.php';
