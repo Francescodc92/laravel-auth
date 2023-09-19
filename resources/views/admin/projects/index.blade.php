@@ -23,7 +23,9 @@
                 <td>{{ $project->title }}</td>
                 <td>{{ $project->collaborators }}</td>
                 <td>{{ $project->technologies }}</td>
-                <td><a href="" class="btn btn-primary">vedi</a></td>
+                <td>
+                  <a href="{{ route('admin.projects.show',['project'=> $project->id]) }}" class="btn btn-primary">vedi</a>
+                </td>
               </tr>
               @endforeach
             </tbody>
