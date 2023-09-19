@@ -35,16 +35,16 @@
                       Modifica
                   </a>
                   <form 
-                  action=""
-                  method="POST"
-                  class="d-inline-block mt-2"
-                  onsubmit="return confirm('Sei sicuro di voler cancellare questo elemento?');"
+                    action="{{ route('admin.projects.destroy', ['project'=>  $project->id]) }}"
+                    method="POST"
+                    class="d-inline-block mt-2"
+                    onsubmit="return confirm('Sei sicuro di voler cancellare questo elemento?');"
                   >
-                  @csrf
-                  @method('DELETE')
-                  <button type="submit" class="btn btn-danger mt-2">
-                      Elimina
-                  </button>
+                    @csrf
+                    @method('DELETE')
+                    <button type="submit" class="btn btn-danger mt-2">
+                        Elimina
+                    </button>
 
                   </form>
               </div>

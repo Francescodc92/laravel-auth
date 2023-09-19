@@ -103,8 +103,12 @@
             *
           </span>
         </label>
-        <textarea class="form-control" id="description" name="description" rows="3">{{ old('description', $project->description) }}</textarea>
-
+        <textarea class="form-control @error('description') is-invalid @enderror" id="description" name="description" rows="3">{{ old('description', $project->description) }}</textarea>
+        @error('description')
+            <div class="alert alert-danger my-2">
+                {{ $message }}
+            </div>
+        @enderror
       </div>
       
       <button type="submit" class="btn btn-warning">
