@@ -24,7 +24,23 @@
                 <td>{{ $project->collaborators }}</td>
                 <td>{{ $project->technologies }}</td>
                 <td>
-                  <a href="{{ route('admin.projects.show',['project'=> $project->id]) }}" class="btn btn-primary">vedi</a>
+                  <a href="{{ route('admin.projects.show',['project'=> $project->id]) }}" class="btn btn-primary mt-2">vedi</a>
+                  <a href="" class="btn btn-warning mt-2">
+                    Modifica
+                  </a>
+                  <form 
+                    action=""
+                    method="POST"
+                    class="d-inline-block mt-2"
+                    onsubmit="return confirm('Sei sicuro di voler cancellare questo elemento?');"
+                  >
+                    @csrf
+                    @method('DELETE')
+                    <button type="submit" class="btn btn-danger mt-2">
+                        Elimina
+                    </button>
+
+                  </form>
                 </td>
               </tr>
               @endforeach
