@@ -36,7 +36,12 @@ class ProjectController extends Controller
     {
         $formData = $request->validated();
 
-        $preview_path = Storage::put('uploads', $formData['preview']);
+        $preview_path = null;
+        if (isset($formData['preview'])) {
+            $preview_path = Storage::put('uploads', $formData['preview']);
+        }
+
+
 
         $project = Project::create([
             'title'=>$formData['title'],
@@ -69,13 +74,31 @@ class ProjectController extends Controller
      */
     public function update(UpdateProjectRequest $request, Project $project)
     {
-        $project->title = $request->input('title'); 
-        $project->preview = $request->input('preview'); 
-        $project->collaborators = $request->input('collaborators'); 
-        $project->description = $request->input('description'); 
-        $project->technologies = $request->input('technologies');
-        $project->save();
-         
+        $formData = $request->validated();
+
+        $preview_path = $project->preview;
+        if(isset( $formData['preview'])){
+
+            if($project->preview){
+                Storage::delete($project->preview);
+            }
+
+            $preview_path = Storage::put('uploads', $formData['preview']);
+        }
+        else if (isset($formData['remove_preview_img'])){
+            if($project->preview){
+                Storage::delete($project->preview);
+            }
+            $preview_path = null;
+        }
+
+
+        $project->update([
+            'title'=>$formData['title'],
+            'preview'=>$preview_path,
+            'collaborators'=>$formData['collaborators'],
+            'description'=>$formData['description'],
+        ]);
         return redirect()->route('admin.projects.show', ['project' => $project->id]);
     }
 

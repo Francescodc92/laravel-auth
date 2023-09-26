@@ -5,7 +5,7 @@
 @section('main-content')
 <div class="row">
   <div class="col-12">
-    <form action="{{ route('admin.projects.update', ['project' => $project->id]) }}" method="POST">
+    <form action="{{ route('admin.projects.update', ['project' => $project->id]) }}" method="POST"  enctype="multipart/form-data">
       @csrf
       @method('PUT')
 
@@ -34,21 +34,26 @@
       </div>
 
       <div class="mb-3">
-        <label for="preview" class="form-label">Preview img link</label>
-        <input 
-          type="text" 
-          maxlength="2048" 
-          class="form-control @error('preview') is-invalid @enderror" 
-          id="preview" 
-          name="preview"
-          value="{{ old('preview', $project->preview) }}"
-          placeholder="Enter value..."
+        <label for="preview" class="form-label">immagine progetto</label>
+        <input
+         class="form-control @error('preview') is-invalid @enderror" 
+         type="file" 
+         id="preview" 
+         name="preview"
         >
         @error('preview')
             <div class="alert alert-danger my-2">
                 {{ $message }}
             </div>
         @enderror
+        @if ($project->preview)
+          <img src="{{ asset('storage/'. $project->preview) }}" class="img-fluid rounded-start h-100" alt="{{ $project->title }}">
+        @else
+        @endif
+        <div class="mt-2">
+          <input type="checkbox" class="btn-check" id="remove_preview_img" name="remove_preview_img" value="1" autocomplete="off">
+          <label class="btn btn-outline-primary" for="remove_preview_img">rimuovi immagine</label>
+        </div>
       </div>
       <div class="row">
         <div class="mb-3 col-12 col-md-6">

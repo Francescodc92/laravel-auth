@@ -29,6 +29,7 @@ class UpdateProjectRequest extends FormRequest
             'collaborators'=>'nullable|max:255',
             'description'=>'required',
             'technologies'=>'required',
+            'remove_preview_img'=> 'nullable'
         ];
     }
 
