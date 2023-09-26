@@ -8,6 +8,7 @@ use App\Http\Controllers\Controller;
 
 //model
 use App\Models\Project;
+use Illuminate\Support\Facades\Storage;
 
 class ProjectController extends Controller
 {
@@ -33,13 +34,16 @@ class ProjectController extends Controller
      */
     public function store(StoreProjectRequest $request)
     {
-        $project = new Project();
-        $project->title = $request->input('title'); 
-        $project->preview = $request->input('preview'); 
-        $project->collaborators = $request->input('collaborators'); 
-        $project->description = $request->input('description'); 
-        $project->technologies = $request->input('technologies');
-        $project->save();
+        $formData = $request->validated();
+
+        $preview_path = Storage::put('uploads', $formData['preview']);
+
+        $project = Project::create([
+            'title'=>$formData['title'],
+            'preview'=>$preview_path,
+            'collaborators'=>$formData['collaborators'],
+            'description'=>$formData['description'],
+        ]);
 
         return redirect()->route('admin.projects.show', ['project' => $project->id]);
     }

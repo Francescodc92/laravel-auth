@@ -5,7 +5,7 @@
 @section('main-content')
 <div class="row">
   <div class="col-12">
-    <form action="{{ route('admin.projects.store') }}" method="POST">
+    <form action="{{ route('admin.projects.store') }}" method="POST" enctype="multipart/form-data">
       @csrf
 
       <div class="mb-3">
@@ -33,15 +33,12 @@
       </div>
 
       <div class="mb-3">
-        <label for="preview" class="form-label">Preview img link</label>
-        <input 
-          type="text" 
-          maxlength="2048" 
-          class="form-control @error('preview') is-invalid @enderror" 
-          id="preview" 
-          name="preview"
-          value="{{ old('preview') }}"
-          placeholder="Enter value..."
+        <label for="preview" class="form-label">immagine progetto</label>
+        <input
+         class="form-control @error('preview') is-invalid @enderror" 
+         type="file" 
+         id="preview" 
+         name="preview"
         >
         @error('preview')
             <div class="alert alert-danger my-2">
@@ -49,6 +46,7 @@
             </div>
         @enderror
       </div>
+
       <div class="row">
         <div class="mb-3 col-12 col-md-6">
             <label for="collaborators" class="form-label">

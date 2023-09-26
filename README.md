@@ -16,6 +16,9 @@
 - BONUS
   - Implementiamo la validazione dei dati dei Progetti nelle operazioni CRUD che lo richiedono usando due form requests
 
+- DESCRIZIONE (ES 26/29/2023)
+ - continuiamo a lavorare nella repo dei giorni scorsi e aggiungiamo un'immagine ai nostri progetti.
+ - Ricordiamoci di creare il symlink con l'apposito comando artisan e di aggiungere l'attributo enctype="multipart/form-data" ai form di creazione e di modifica!
 
 ## Tecnologie
 
